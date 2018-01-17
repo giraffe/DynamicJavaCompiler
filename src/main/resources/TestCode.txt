@@ -1,0 +1,33 @@
+package com.xxx;
+
+import java.util.concurrent.Callable;
+
+public class CompilerTestCode implements Callable<String> {
+
+    static {
+    }
+
+    @Override
+    public String call() throws Exception {
+
+        Callable<String> invokeable = new Callable<String>() {
+
+            @Override
+            public String call() {
+                return "b";
+            }
+        };
+        InnerClass in = new InnerClass();
+
+        return invokeable.call() + in.call();
+    }
+
+    static class InnerClass implements Callable<String> {
+
+        @Override
+        public String call() {
+            return "a";
+        }
+    }
+
+}
